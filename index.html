@@ -1,0 +1,53 @@
+ window.onload = fetchWeather;
+    </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        #weather {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        #weather h2 {
+            margin-top: 0;
+        }
+        #weather p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather App</h1>
+    <div id="weather">
+        <h2>Weather Details</h2>
+        <p id="location"></p>
+        <p id="temperature"></p>
+        <p id="description"></p>
+    </div>
+
+    <script>
+        const apiKey = '55ca718a9ccff93016854b838309b769'; // Replace with your OpenWeatherMap API key
+        const city = 'india'; // You can change the city name
+
+        async function fetchWeather() {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+            const data = await response.json();
+            console.log(data);
+
+            document.getElementById('location').innerText = `Location: ${data.name}, ${data.sys.country}`;
+            document.getElementById('temperature').innerText = `Temperature: ${data.main.temp}°C`;
+            document.getElementById('description').innerText = `Weather: ${data.weather[0].description}`;
+        }
+</body>
+</html>
